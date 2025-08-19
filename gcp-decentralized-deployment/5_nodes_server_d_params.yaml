@@ -1,0 +1,36 @@
+# Configuration for Peer Node (Server D)
+participants:
+  - el_type: geth
+    el_image: ethereum/client-go:latest
+    el_extra_params:
+      - "--bootnodes=ENODE_OF_SERVER_A"
+    cl_type: lighthouse
+    cl_image: sigp/lighthouse:latest
+    cl_extra_params:
+      - "--boot-nodes=ENR_OF_SERVER_A"
+      - "--enr-address=YOUR_SERVER_D_PUBLIC_IP"
+    vc_type: lighthouse
+    vc_image: sigp/lighthouse:latest
+    vc_extra_params: []
+    count: 1
+    validator_count: 13
+
+network_params:
+  # Identical to bootnode
+  network: kurtosis
+  network_id: "7111711"
+  withdrawal_address: "0x31fcB3C05F73242AeDd88b024E33d25a81Fe67DB"
+  
+additional_services: []
+disable_peer_scoring: false
+persistent: true
+mev_type: "mev-rs"
+
+port_publisher:
+  nat_exit_ip: YOUR_SERVER_D_PUBLIC_IP
+  el:
+    enabled: true
+    public_port_start: 32000
+  cl:
+    enabled: true
+    public_port_start: 33000

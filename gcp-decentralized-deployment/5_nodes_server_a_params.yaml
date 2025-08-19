@@ -1,0 +1,42 @@
+# Configuration for the Bootnode (Server A)
+participants:
+  - el_type: geth
+    el_image: ethereum/client-go:latest
+    el_extra_params: []
+    cl_type: lighthouse
+    cl_image: sigp/lighthouse:latest
+    cl_extra_params:
+      - "--enr-address=YOUR_SERVER_A_PUBLIC_IP"
+    vc_type: lighthouse
+    vc_image: sigp/lighthouse:latest
+    vc_extra_params: []
+    count: 1
+    # Total validators will be 12 + 13 + 13 + 13 + 13 = 64
+    validator_count: 12
+
+network_params:
+  network: kurtosis
+  network_id: "7111711"
+  deposit_contract_address: "0x00000000219ab540356cBB839Cbe05303d7705Fa"
+  seconds_per_slot: 12
+  num_validator_keys_per_node: 64
+  preregistered_validator_keys_mnemonic:
+    "giant issue aisle success illegal bike spike
+    question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy
+    very lucky have athlete"
+  withdrawal_address: "0x31fcB3C05F73242AeDd88b024E33d25a81Fe67DB"
+  # Other params copied from single-node setup...
+  
+additional_services: []
+disable_peer_scoring: false
+persistent: true
+mev_type: "mev-rs"
+
+port_publisher:
+  nat_exit_ip: YOUR_SERVER_A_PUBLIC_IP
+  el:
+    enabled: true
+    public_port_start: 32000
+  cl:
+    enabled: true
+    public_port_start: 33000

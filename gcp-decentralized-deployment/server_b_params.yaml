@@ -1,0 +1,77 @@
+# Configuration for the Peer Node (Server B)
+participants:
+  - el_type: geth
+    el_image: ethereum/client-go:latest
+    el_extra_params:
+      # This bootnodes flag tells Geth how to find the first node.
+      - "--bootnodes=ENODE_OF_SERVER_A"
+    cl_type: lighthouse
+    cl_image: sigp/lighthouse:latest
+    cl_extra_params:
+      # This boot-nodes flag tells Lighthouse how to find the first node.
+      - "--boot-nodes=ENR_OF_SERVER_A"
+      - "--enr-address=YOUR_SERVER_B_PUBLIC_IP"
+    vc_type: lighthouse
+    vc_image: sigp/lighthouse:latest
+    vc_extra_params: []
+    # We'll split the validators between the nodes.
+    count: 1
+    validator_count: 32
+
+# The rest of the parameters are identical to the bootnode to ensure they are part of the same network.
+network_params:
+  network: kurtosis
+  network_id: "7111711"
+  deposit_contract_address: "0x00000000219ab540356cBB839Cbe05303d7705Fa"
+  seconds_per_slot: 12
+  num_validator_keys_per_node: 64
+  preregistered_validator_keys_mnemonic:
+    "giant issue aisle success illegal bike spike
+    question tent bar rely arctic volcano long crawl hungry vocal artwork sniff fantasy
+    very lucky have athlete"
+  preregistered_validator_count: 0
+  genesis_delay: 20
+  genesis_gaslimit: 60000000
+  max_per_epoch_activation_churn_limit: 8
+  churn_limit_quotient: 65536
+  ejection_balance: 16000000000
+  eth1_follow_distance: 2048
+  min_validator_withdrawability_delay: 256
+  shard_committee_period: 256
+  deneb_fork_epoch: 0
+  electra_fork_epoch: 0
+  fulu_fork_epoch: 18446744073709551615
+  gloas_fork_epoch: 18446744073709551615
+  network_sync_base_url: https://snapshots.ethpandaops.io/
+  force_snapshot_sync: false
+  data_column_sidecar_subnet_count: 128
+  samples_per_slot: 8
+  custody_requirement: 4
+  max_blobs_per_block_electra: 9
+  target_blobs_per_block_electra: 6
+  base_fee_update_fraction_electra: 5007716
+  additional_preloaded_contracts: {}
+  devnet_repo: ethpandaops
+  prefunded_accounts: '{"0xCCf5ED35048c642330705C3ab485c10101F4aB4F": {"balance": "1000000000000000000000000000"}, "0x31fcB3C05F73242AeDd88b024E33d25a81Fe67DB": {"balance": "1000000000000000000000000000"}}'
+  bpo_1_epoch: 18446744073709551615
+  bpo_1_max_blobs: 0
+  bpo_1_target_blobs: 0
+  bpo_1_base_fee_update_fraction: 0
+  withdrawal_type: "0x00"
+  withdrawal_address: "0x31fcB3C05F73242AeDd88b024E33d25a81Fe67DB"
+  validator_balance: 32
+  min_epochs_for_data_column_sidecars_requests: 4096
+
+additional_services: []
+disable_peer_scoring: false
+persistent: true
+mev_type: "flashbots"
+
+port_publisher:
+  nat_exit_ip: YOUR_SERVER_B_PUBLIC_IP
+  el:
+    enabled: true
+    public_port_start: 32000
+  cl:
+    enabled: true
+    public_port_start: 33000
