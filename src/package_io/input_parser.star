@@ -977,6 +977,7 @@ def parse_network_params(plan, input_args):
         or constants.NETWORK_NAME.shadowfork in result["network_params"]["network"]
     ):
         if MIN_VALIDATORS > actual_num_validators:
+            pass
             #fail(
             #    "We require at least {0} validators but got {1}".format(
             #        MIN_VALIDATORS, actual_num_validators
