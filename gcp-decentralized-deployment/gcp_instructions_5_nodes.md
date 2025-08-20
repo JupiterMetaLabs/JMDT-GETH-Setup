@@ -34,7 +34,10 @@ sudo usermod -aG docker $USER
 # Log out and log back in for the group change to take effect
 
 # Install Kurtosis
-curl -fsSL https://github.com/kurtosis-tech/kurtosis/releases/latest/download/install-kurtosis-cli.sh | bash
+echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
+sudo apt update
+sudo apt install kurtosis-cli
+bash
 ```
 
 ### **Step 4: Deploy the Bootnode (Server A)**
@@ -43,7 +46,7 @@ curl -fsSL https://github.com/kurtosis-tech/kurtosis/releases/latest/download/in
 2.  **Update `5_nodes_server_a_params.yaml`:** Replace `YOUR_SERVER_A_PUBLIC_IP` with the static public IP of Server A.
 3.  **Start the bootnode:**
     ```bash
-    kurtosis run . --args-file 5_nodes_server_a_params.yaml
+    kurtosis run . --args-file gcp-decentralized-deployment/5_nodes_server_a_params.yaml
     ```
 4.  **Retrieve the Bootnode's Connection Details (enode and ENR):**
     *   **Get Geth enode:**
@@ -71,7 +74,7 @@ For each of the remaining four servers:
 4.  **Start the peer node:**
     ```bash
     # Example for Server B
-    kurtosis run . --args-file 5_nodes_server_b_params.yaml
+    kurtosis run . --args-file gcp-decentralized-deployment/5_nodes_server_b_params.yaml
     ```
     Repeat for Servers C, D, and E with their respective config files.
 

@@ -34,7 +34,10 @@ sudo usermod -aG docker $USER
 # Log out and log back in for the group change to take effect
 
 # Install Kurtosis
-curl -fsSL https://github.com/kurtosis-tech/kurtosis/releases/latest/download/install-kurtosis-cli.sh | bash
+echo "deb [trusted=yes] https://apt.fury.io/kurtosis-tech/ /" | sudo tee /etc/apt/sources.list.d/kurtosis.list
+sudo apt update
+sudo apt install kurtosis-cli
+bash
 ```
 
 ### **Step 4: Deploy the Bootnode (Server A)**
@@ -43,7 +46,7 @@ curl -fsSL https://github.com/kurtosis-tech/kurtosis/releases/latest/download/in
 2.  **Update `server_a_params.yaml`:** Replace the placeholder `YOUR_SERVER_A_PUBLIC_IP` with the actual static public IP of Server A.
 3.  **Start the bootnode:**
     ```bash
-    kurtosis run . --args-file server_a_params.yaml
+    kurtosis run . --args-file gcp-decentralized-deployment/server_a_params.yaml
     ```
 4.  **Retrieve the Bootnode's Connection Details:** Once the service is running, you need to get its enode (for Geth) and ENR (for Lighthouse).
     *   **Get Geth enode:**
@@ -69,7 +72,7 @@ curl -fsSL https://github.com/kurtosis-tech/kurtosis/releases/latest/download/in
     *   Replace `ENR_OF_SERVER_A` with the ENR string you retrieved from Server A.
 3.  **Start the peer node:**
     ```bash
-    kurtosis run . --args-file server_b_params.yaml
+    kurtosis run . --args-file gcp-decentralized-deployment/server_b_params.yaml
     ```
 
 ### **Step 6: Verify the Connection**
