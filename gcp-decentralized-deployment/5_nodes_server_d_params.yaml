@@ -24,7 +24,7 @@ network_params:
 additional_services: []
 disable_peer_scoring: false
 persistent: true
-mev_type: "mev-rs"
+mev_type: "mock"
 
 port_publisher:
   nat_exit_ip: YOUR_SERVER_D_PUBLIC_IP
