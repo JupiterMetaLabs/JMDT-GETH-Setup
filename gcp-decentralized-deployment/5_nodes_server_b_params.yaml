@@ -3,12 +3,12 @@ participants:
   - el_type: geth
     el_image: ethereum/client-go:latest
     el_extra_params:
-      - "--bootnodes=ENODE_OF_SERVER_A"
+      - "--bootnodes=enode://eab37a1eb44ccd97f94bb2f9dcb8aaec4ab590ca960f9071baed9cbdabffc172feee7ca1bc632f11a58620d11b0efeae4e5becd7e583e54bf1c691fa6b27e931@34.174.63.179:32000"
     cl_type: lighthouse
     cl_image: sigp/lighthouse:latest
     cl_extra_params:
-      - "--boot-nodes=ENR_OF_SERVER_A"
-      - "--enr-address=YOUR_SERVER_B_PUBLIC_IP"
+      - "--boot-nodes=enr:-N24QPZg7yAORQ2UDQGU7LzF1XKxSbZT-25zEHHWH7IMApniLslgTSKif57bk8Vu-B8YXum4oNR0mYgMrNAeOUbOx_QHh2F0dG5ldHOIAAAGAAAAAACGY2xpZW500YpMaWdodGhvdXNlhTcuMS4whGV0aDKQB1JOe2AAADj__________4JpZIJ2NIJpcIQirj-zhHF1aWOCgOuJc2VjcDI1NmsxoQKCyKH4dPWNa2YDvVlS_GY5068vsHj_rroTE-AL32_8QYhzeW5jbmV0cw-DdGNwgoDog3VkcIKA6A"
+      - "--enr-address=34.174.191.157"
     vc_type: lighthouse
     vc_image: sigp/lighthouse:latest
     vc_extra_params: []
@@ -27,7 +27,7 @@ persistent: true
 mev_type: "mock"
 
 port_publisher:
-  nat_exit_ip: YOUR_SERVER_B_PUBLIC_IP
+  nat_exit_ip: 34.174.191.157
   el:
     enabled: true
     public_port_start: 32000

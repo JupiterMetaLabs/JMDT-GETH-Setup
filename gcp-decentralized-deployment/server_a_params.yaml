@@ -2,7 +2,9 @@
 participants:
   - el_type: geth
     el_image: ethereum/client-go:latest
-    el_extra_params: []
+    el_extra_params:
+      - "--http.addr=0.0.0.0"
+      - "--http.vhosts=*"
     cl_type: lighthouse
     cl_image: sigp/lighthouse:latest
     cl_extra_params:
@@ -28,7 +30,8 @@ network_params:
   withdrawal_address: "0x31fcB3C05F73242AeDd88b024E33d25a81Fe67DB"
   # Other params copied from single-node setup...
   
-additional_services: []
+additional_services:
+  - nginx
 disable_peer_scoring: false
 persistent: true
 mev_type: "mock"
@@ -41,3 +44,6 @@ port_publisher:
   cl:
     enabled: true
     public_port_start: 33000
+  additional_services:
+    enabled: true
+    public_port_start: 8545
